@@ -10,12 +10,12 @@ SEARCH_API_ENDPOINT = "https://api.tequila.kiwi.com/v2/search"
 
 
 class FlightSearch:
-# This class searches for available flights with the Kiwi/Tequila API.
+    """This class searches for available flights with the Kiwi/Tequila API."""
     def __init__(self):
         self.city_codes = []
 
-    # get missing iata codes
     def get_destination_code(self, city_name):
+        """Gets missing IATA codes"""
         location_endpoint = f"{KIWI_URL}/locations/query"
         headers = {"apikey": KIWI_API_KEY}
         for city in city_name:
@@ -30,8 +30,8 @@ class FlightSearch:
             self.city_codes.append(code)
         return self.city_codes
 
-    # get flights within set parameters and save flight data to FlightData-class
     def check_flights(self, origin_city_code, destination_city_code, from_time, to_time):
+        """Gets flights within set parameters and saves flight data to FlightData-class"""
         headers = {"apikey": KIWI_API_KEY}
         flight_params = {
             "fly_from": origin_city_code,

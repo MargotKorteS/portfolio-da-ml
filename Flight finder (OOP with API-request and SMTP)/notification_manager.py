@@ -5,9 +5,10 @@ MY_PASSWORD = "my-private-password"
 
 
 class NotificationManager:
-    # This class is responsible for sending notifications with the deal flight details.
+    """This class is responsible for sending notifications with the deal flight details."""
     def send_notification(self, flight_price, flight_destination, destination_iata, origin_city, origin_iata, amount_of_stopovers, via_city,
                           outbound_date, inbound_date):
+        """Sends out an email notification with the deal flight details"""
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
             connection.login(user=MY_EMAIL, password=MY_PASSWORD)

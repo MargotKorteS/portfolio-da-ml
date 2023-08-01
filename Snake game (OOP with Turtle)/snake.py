@@ -12,6 +12,7 @@ colour_options = ["blue", "red", "purple", "orange", "green", "yellow", "pink", 
 
 
 class Snake:
+    """This class creates the snake, updates the snake length and sets controls for the snake's movements."""
     def __init__(self):
         self.segments = []
         self.x_axis = 0
@@ -19,6 +20,7 @@ class Snake:
         self.head = self.segments[0]
 
     def move(self):
+        """Makes the blocks of the snake follow the path of the block in the front"""
         for block_num in range((len(self.segments)-1), 0, -1):
             new_x = self.segments[block_num-1].xcor()
             new_y = self.segments[block_num-1].ycor()
@@ -26,10 +28,12 @@ class Snake:
         self.head.forward(MOVE_DISTANCE)
 
     def create_snake(self):
+        """Creates the snake at the starting position."""
         for position in STARTING_POSITIONS:
             self.add_segment(position)
 
     def add_segment(self, position):
+        """Extends the snake with 1 segment, using a randomly selected colour."""
         new_block = Turtle(shape="square")
         new_block.color(random.choice(colour_options))
         new_block.penup()
@@ -37,6 +41,7 @@ class Snake:
         self.segments.append(new_block)
 
     def reset(self):
+        """Resets the amount of segments in the snake and calls the create_snake method"""
         for segment in self.segments:
             segment.reset()
         self.segments.clear()
@@ -44,27 +49,32 @@ class Snake:
         self.head = self.segments[0]
 
     def extend(self):
+        """Calls the add_segment method and assigns the position as the last segment in the line."""
         self.add_segment(self.segments[-1].position())
 
     def up(self):
+        """Allows the snake to move up, but only if the snake is not currently moving down."""
         if self.head.heading() != DOWN:
             self.head.setheading(UP)
         else:
             None
 
     def down(self):
+        """Allows the snake to move down, but only if the snake is not currently moving up."""
         if self.head.heading() != UP:
             self.head.setheading(DOWN)
         else:
             None
 
     def left(self):
+        """Allows the snake to move left, but only if the snake is not currently moving right."""
         if self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
         else:
             None
 
     def right(self):
+        """Allows the snake to move right, but only if the snake is not currently moving left."""
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
         else:
